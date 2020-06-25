@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>IoT.Core</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Abp.AutoMapper" Version="5.1.0" />
+    <PackageReference Include="Abp.ZeroCore.EntityFrameworkCore" Version="5.1.0" />
+    <PackageReference Include="Castle.Windsor.MsDependencyInjection" Version="3.3.1" />
+    <PackageReference Include="L.52ABP.Common" Version="4.1.286.98" />
+    <PackageReference Include="L.52ABP.Core" Version="4.1.286.98" />
+    <PackageReference Include="MongoDB.Driver" Version="2.10.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\IoTManager.Utility\IoTManager.Utility.csproj" />
+  </ItemGroup>
+
+</Project>
