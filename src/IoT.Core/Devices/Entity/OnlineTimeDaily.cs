@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
-using IoTManager.Utility.Precision;
 using NPOI.SS.Formula.Functions;
 
 namespace IoT.Core

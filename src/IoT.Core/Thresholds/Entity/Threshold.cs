@@ -7,8 +7,6 @@ using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using IoT.Core.Thresholds;
 using NPOI.HSSF.Record;
-using IoTManager.Utility;
-using IoTManager.Utility.Precision;
 
 namespace IoT.Core
 {

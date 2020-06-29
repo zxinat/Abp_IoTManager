@@ -19,5 +19,10 @@ namespace IoT.Core.Cities
             _cityRepositories.Delete(entity);
         }
 
+        public City Update(City entity)
+        {
+           return _cityRepositories.Update(entity);
+        }
+
     }
 }

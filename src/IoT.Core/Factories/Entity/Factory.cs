@@ -15,8 +15,7 @@ namespace IoT.Core
         public Factory()
         {
             CreationTime = DateTime.Now;
-            LastModificationTime = DateTime.Now;
-            DeletionTime = DateTime.Now;
+            LastModificationTime=DateTime.Now;
         }
 
         /// <summary>

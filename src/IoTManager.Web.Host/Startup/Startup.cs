@@ -16,6 +16,8 @@ using IoTManager.Identity;
 using Abp.AspNetCore.SignalR.Hubs;
 using Abp.AspNetCore.Mvc.Antiforgery;
 using Newtonsoft.Json.Serialization;
+using Microsoft.Extensions.Options;
+
 using Abp.Json;
 using Abp.Dependency;
 using Microsoft.OpenApi.Models;
@@ -88,6 +90,8 @@ namespace IoTManager.Web.Host.Startup
                     Type = SecuritySchemeType.ApiKey
                 });
             });
+            services.AddOptions();
+            services.Configure<ConnectionStrings>(_appConfiguration.GetSection("ConnectionStrings"));
 
             //配置Abp和依赖项注入
             return services.AddAbp<IoTManagerWebHostModule>(

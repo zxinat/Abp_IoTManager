@@ -1,21 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Text;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
+using Abp.Collections.Extensions;
 using Abp.Domain.Entities;
 using Abp.Domain.Services;
 using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using IoT.Application.CityAppService.DTO;
 using IoT.Core.Cities;
 using IoT.Core;
+using IoT.Core.MongoDb;
 using Masuit.Tools;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using NUglify.Helpers;
-
+using System.Linq.Dynamic.Core;
+using System.Linq;
+using Abp.Linq.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace IoT.Application.CityAppService
 {
@@ -30,12 +34,22 @@ namespace IoT.Application.CityAppService
             _cityRepository = cityRepository;
         }
 
+
         public CityDto Get(EntityDto<int> input)
         {
             var entity = _cityRepository.Get(input.Id);
             return entity.MapTo<CityDto>();
         }
 
+        public PagedResultDto<CityDto> GetAll(CityPagedSortedAndFilteredDto input)
+        {
+            var query = _cityRepository.GetAll();
+            var total = query.Count();
+            var result = query.OrderBy(input.Sorting).AsNoTracking().PageBy(input).ToList();
+            return new PagedResultDto<CityDto>(total,ObjectMapper.Map<List<CityDto>>(result));
+
+        }
+        /*
         public PagedResultDto<CityDto> GetAll(PagedResultRequestDto input)
         {
             var query = _cityRepository.GetAll();
@@ -44,7 +58,7 @@ namespace IoT.Application.CityAppService
             return new PagedResultDto<CityDto>(total,new List<CityDto>(
                 ObjectMapper.Map<List<CityDto>>(result)));
         }
-
+        */
         public CityDto Create(CreateCityDto input)
         {
             string requestUrl= "https://restapi.amap.com/v3/geocode/geo?address=" + input.CityName +
@@ -79,9 +93,18 @@ namespace IoT.Application.CityAppService
             return result.MapTo<CityDto>();
         }
 
-        public CityDto Update(CreateCityDto input)
+        public CityDto Update(UpdateCityDto input)
         {
-            throw new NotImplementedException();
+            var city = _cityRepository.Get(input.Id);
+            if (city.IsNullOrDeleted())
+            {
+                throw new ArgumentException("Error Input");
+            }
+
+            city.Remark = input.Remark;
+            var result= _cityRepository.Update(city);
+            CurrentUnitOfWork.SaveChanges();
+            return result.MapTo<CityDto>();
         }
 
         public void Delete(EntityDto<int> input)

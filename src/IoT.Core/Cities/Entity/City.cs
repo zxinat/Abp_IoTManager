@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
-using IoTManager.Utility.Precision;
 
 namespace IoT.Core
 {
@@ -15,8 +14,6 @@ namespace IoT.Core
         public City()
         {
             CreationTime = DateTime.Now;
-            LastModificationTime = DateTime.Now;
-            DeletionTime = DateTime.Now;
         }
         [Required]
         [MaxLength(30)]
@@ -30,6 +27,7 @@ namespace IoT.Core
         public decimal? Longitude { get; set; }
         [Column(TypeName = "decimal(11,2)")]
         public decimal? Latitude { get; set; }
+        private List<Factory> Factories { get; set; }
 
         public DateTime CreationTime { get; set; }
         public long? CreatorUserId { get; set; }

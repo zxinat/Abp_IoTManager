@@ -8,7 +8,6 @@ using Castle.DynamicProxy;
 using Abp.Configuration.Startup;
 using Abp.MongoDb.Configuration;
 using Abp.Reflection.Extensions;
-using IoT.MongoDB.Repository;
 
 namespace IoT.MongoDB
 {

@@ -19,7 +19,7 @@ namespace IoT.Application
 
         public DeviceDataAppService( IDeviceDataManager dataManager)
         {
-            //_dataRepository = dataRepository;
+           // _dataRepository = dataRepository;
             _dataManager = dataManager;
         }
 
@@ -29,12 +29,15 @@ namespace IoT.Application
             
             var data= _dataManager.GetAll(input);
             var total = data.Count;
+            
+  
             return new PagedResultDto<DeviceDataDto>(total,ObjectMapper.Map<List<DeviceDataDto>>(data));
         }
 
-        public DeviceData GetByName(string deviceName)
+        public DeviceDataDto GetByName(string deviceName)
         {
-            return _dataManager.GetByName(deviceName);
+            var data = _dataManager.GetByName(deviceName);
+            return ObjectMapper.Map<DeviceDataDto>(data);
         }
     }
 }

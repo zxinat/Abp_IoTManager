@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using IoT.Core.Configuration;
+using IoTManager.Configuration;
 using IoT.Core;
 using IoT.Core.Web;
 

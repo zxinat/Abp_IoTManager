@@ -15,7 +15,6 @@ namespace IoT.Core
         {
             CreationTime = DateTime.Now;
             LastModificationTime = DateTime.Now;
-            DeletionTime = DateTime.Now;
         }
 
         [Required]
@@ -30,6 +29,8 @@ namespace IoT.Core
         public int FactoryId { get; set; }
         [ForeignKey("FactoryId")]
         public Factory Factory { get; set; }
+
+        private List<Gateway> Gateways { get; set; }
 
         public DateTime CreationTime { get; set; }
         public long? CreatorUserId { get; set; }

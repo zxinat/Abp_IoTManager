@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace IoT.Application.CityAppService
 {
-    public interface ICityAppService:ICrudAppService<CityDto,int,PagedResultRequestDto,CreateCityDto,CreateCityDto>
+    public interface ICityAppService:ICrudAppService<CityDto,int,CityPagedSortedAndFilteredDto,CreateCityDto,UpdateCityDto>
     {
     }
 }

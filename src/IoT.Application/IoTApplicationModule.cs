@@ -14,6 +14,10 @@ namespace IoT.Application
     {
         public override void PreInitialize()
         {
+            Configuration.Modules.AbpAutoMapper().Configurators.Add(config =>
+            {
+                config.AddProfile<IoTDtoProfile>();
+            });
             //Configuration.Authorization.Providers.Add<IoTManagerAuthorizationProvider>();
         }
 

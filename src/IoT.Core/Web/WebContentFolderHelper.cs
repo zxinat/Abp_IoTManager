@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using Abp.Reflection.Extensions;
+using IoTManager;
 
 namespace IoT.Core.Web
 {
@@ -13,7 +14,7 @@ namespace IoT.Core.Web
     {
         public static string CalculateContentRootFolder()
         {
-            var coreAssemblyDirectoryPath = Path.GetDirectoryName(typeof(IoTCoreModule).GetAssembly().Location);
+            var coreAssemblyDirectoryPath = Path.GetDirectoryName(typeof(IoTManagerCoreModule).GetAssembly().Location);
             if (coreAssemblyDirectoryPath == null)
             {
                 throw new Exception("Could not find location of IoT.Core assembly!");

@@ -16,7 +16,6 @@
     <RootNamespace>IoTManager</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\IoT.MongoDB\IoT.MongoDB.csproj" />
     <ProjectReference Include="..\IoT.Application\IoT.Application.csproj" />
     <ProjectReference Include="..\IoT.EntityFrameworkCore\IoT.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\IoTManager.Application\IoTManager.Application.csproj" />

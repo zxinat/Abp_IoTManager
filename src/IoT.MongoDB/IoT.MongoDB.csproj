@@ -10,8 +10,4 @@
     <PackageReference Include="mongocsharpdriver" Version="2.10.4" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\src\IoT.Application\IoT.Application.csproj" />
-  </ItemGroup>
-
 </Project>
