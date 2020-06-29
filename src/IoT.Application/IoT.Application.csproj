@@ -14,4 +14,10 @@
     <ProjectReference Include="..\IoT.Core\IoT.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DeviceAppService\DeviceService\Dto\" />
+    <Folder Include="DeviceAppService\DTO\" />
+    <Folder Include="DeviceAppService\OnlineTimeDailyService\Dto\" />
+  </ItemGroup>
+
 </Project>

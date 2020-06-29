@@ -45,7 +45,9 @@ namespace IoT.Application.CityAppService
         {
             var query = _cityRepository.GetAll();
             var total = query.Count();
-            var result = query.OrderBy(input.Sorting).AsNoTracking().PageBy(input).ToList();
+            var result = input.Sorting != null
+                ? query.OrderBy(input.Sorting).AsNoTracking().PageBy(input).ToList()
+                : query.PageBy(input).ToList();
             return new PagedResultDto<CityDto>(total,ObjectMapper.Map<List<CityDto>>(result));
 
         }

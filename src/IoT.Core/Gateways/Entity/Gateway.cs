@@ -15,7 +15,6 @@ namespace IoT.Core
         {
             CreationTime = DateTime.Now;
             LastModificationTime = DateTime.Now;
-            DeletionTime = DateTime.Now;
         }
 
         [Required]

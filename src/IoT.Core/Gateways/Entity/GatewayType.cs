@@ -15,6 +15,7 @@ namespace IoT.Core
         {
             CreationTime = DateTime.Now;
             LastModificationTime = DateTime.Now;
+            OfflineTime = 30;
         }
         [Required]
         [MaxLength(50)]
