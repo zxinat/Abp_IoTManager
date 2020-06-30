@@ -37,7 +37,8 @@ namespace IoT.Application.GatewayAppService
             var query = _gatewayRepository.GetAll().Where(g => g.Id == input.Id)
                 .Include(g => g.Workshop)
                 .Include(g => g.Workshop.Factory)
-                .Include(g => g.Workshop.Factory.City);
+                .Include(g => g.Workshop.Factory.City)
+                .Include(g=>g.GatewayType);
             var entity = query.FirstOrDefault();
             return ObjectMapper.Map<GatewayDto>(entity);
         }
@@ -47,7 +48,8 @@ namespace IoT.Application.GatewayAppService
             var query=_gatewayRepository.GetAll()
                 .Include(g => g.Workshop)
                 .Include(g => g.Workshop.Factory)
-                .Include(g => g.Workshop.Factory.City);
+                .Include(g => g.Workshop.Factory.City)
+                .Include(g=>g.GatewayType);
             var total = query.Count();
             var result = input.Sorting != null
                 ? query.OrderBy(input.Sorting).AsNoTracking().PageBy(input).ToList()
@@ -66,14 +68,24 @@ namespace IoT.Application.GatewayAppService
                 throw new ApplicationException("网关已存在");
             }
 
-            var workshopQuery = _workshopRepository.GetAll().Where(w => w.WorkshopName == input.WorkshopName);
-            if (!workshopQuery.Any())
+            var workshopQuery = _workshopRepository.GetAllIncluding().Where(w => w.WorkshopName == input.WorkshopName)
+                .Where(w => w.Factory.FactoryName == input.FactoryName)
+                .Where(w => w.Factory.City.CityName == input.CityName);
+            var workshop = workshopQuery.FirstOrDefault();
+            if (workshop==null)
             {
                 throw new ApplicationException("Workshop不存在");
             }
 
+            var gatewayTypeQuery = _gatewayTypeRepository.GetAll().Where(gt => gt.TypeName == input.GatewayTypeName);
+            var gatewayType = gatewayTypeQuery.FirstOrDefault();
+            if (gatewayType==null)
+            {
+                throw new ApplicationException("网关类型不存在");
+            }
             var gateway = ObjectMapper.Map<Gateway>(input);
-            gateway.Workshop = workshopQuery.FirstOrDefault();
+            gateway.Workshop = workshop;
+            gateway.GatewayType = gatewayType;
             var result = _gatewayRepository.Insert(gateway);
             CurrentUnitOfWork.SaveChanges();
             return ObjectMapper.Map<GatewayDto>(result);

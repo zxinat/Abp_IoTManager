@@ -41,7 +41,9 @@ namespace IoT.Application
                 .ForMember(des => des.FactoryName,
                     opt => opt.MapFrom(i => i.Workshop.Factory.FactoryName))
                 .ForMember(des => des.CityName,
-                    opt => opt.MapFrom(i => i.Workshop.Factory.City.CityName));
+                    opt => opt.MapFrom(i => i.Workshop.Factory.City.CityName))
+                .ForMember(des=>des.GatewayTypeName,
+                    opt=>opt.MapFrom(i=>i.GatewayType.TypeName));
             CreateMap<CreateGatewayDto, Gateway>();
             //Tag
             CreateMap<Tag, TagDto>();
